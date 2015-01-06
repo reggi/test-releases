@@ -15,7 +15,11 @@ LATEST_VERSION=`git describe --tags`
 git tag $VERSION
 git push --tags
 
-CHANGELOG=`git log --pretty=oneline ^$LATEST_VERSION $VERSION | sed -E -l -e 's/........................................ (.+)/* \1/'`
+echo $LATEST_VERSION
+echo $VERSION
+
+#CHANGELOG=`git log --pretty=oneline ^$LATEST_VERSION $VERSION | sed -E -l -e 's/........................................ (.+)/* \1/'`
+CHANGELOG=`git log --pretty=format:%s $LATEST_VERSION...$VERSION | sed -E -l -e 's/(.+)/* \1/'`
 
 echo $CHANGELOG
 
