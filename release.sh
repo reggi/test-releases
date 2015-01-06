@@ -17,6 +17,8 @@ git push --tags
 
 CHANGELOG=`git log --pretty=oneline ^$LATEST_VERSION $VERSION | sed -E -l -e 's/........................................ (.+)/* \1/'`
 
+echo $CHANGELOG
+
 github-release release \
   --tag $VERSION \
   --name $APP_NAME" "$VERSION \
