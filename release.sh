@@ -8,10 +8,13 @@ export GITHUB_TOKEN=e1ee771642938433c8215a48e034173fa7b4016b
 export GITHUB_USER=reggi
 export GITHUB_REPO=test-releases
 
+#LATEST_VERSION=`git log --pretty="format:%d" | head -n2 | tail -n1 | sed 's/[()]//g' | sed  's ......  '`
+#LATEST_VERSION=`git for-each-ref --format='%(*committerdate:raw)%(committerdate:raw) %(refname)' | sort -n | awk '{ print $4, $3; }' | sed "refs/heads/master" | tail -r | head -n3 | tail -n1 | sed -E -l -e 's/....\/....\/(.+)/\1/'`
+LATEST_VERSION=`git describe --tags`
+
 git tag $VERSION
 git push --tags
 
-LATEST_VERSION=`git log --pretty="format:%d" | head -n2 | tail -n1 | sed 's/[()]//g' | sed  's ......  '`
 CHANGELOG=`git log --pretty=oneline ^$LATEST_VERSION $VERSION | sed -E -l -e 's/........................................ (.+)/* \1/'`
 
 github-release release \
